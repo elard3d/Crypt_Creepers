@@ -17,6 +17,10 @@ public class PlayerScript : MonoBehaviour
     private Vector2 facingDirection;
 
     [SerializeField] private Transform bulletPrefab;
+
+    private bool gunLoaded = true;
+
+    [SerializeField] private float fireRate = 1;
     
     // Start is called before the first frame update
     void Start()
@@ -42,13 +46,22 @@ public class PlayerScript : MonoBehaviour
          aim.position = transform.position + (Vector3)facingDirection.normalized;
 
          //Disparar con Mouse
-         if (Input.GetMouseButton(0))
+         if (Input.GetMouseButton(0) && gunLoaded)
          {
+             gunLoaded = false;
              float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg; // convierde de radiames a grados
              Quaternion targrtRotation = Quaternion.AngleAxis(angle, Vector3.forward);
              Instantiate(bulletPrefab, transform.position, targrtRotation);
-             
+             StartCoroutine(ReloadGun());
+
          }
 
     }
+
+    IEnumerator ReloadGun()
+    {
+        yield return new WaitForSeconds(1/fireRate);
+        gunLoaded = true;
+    }
+
 }
