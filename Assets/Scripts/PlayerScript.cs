@@ -15,6 +15,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Transform aim;
     [SerializeField] private Camera _camera;
     private Vector2 facingDirection;
+
+    [SerializeField] private Transform bulletPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -38,9 +40,15 @@ public class PlayerScript : MonoBehaviour
         
          facingDirection = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
          aim.position = transform.position + (Vector3)facingDirection.normalized;
-         
-         
 
+         //Disparar con Mouse
+         if (Input.GetMouseButton(0))
+         {
+             float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg; // convierde de radiames a grados
+             Quaternion targrtRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+             Instantiate(bulletPrefab, transform.position, targrtRotation);
+             
+         }
 
     }
 }
