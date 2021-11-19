@@ -1,17 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-
-
     float _h;
     float _v;
 
     private Vector3 moveDirection;
     
     [SerializeField] private float speed = 3;
+    [SerializeField] private float health = 3;
     [SerializeField] private Transform aim;
     [SerializeField] private Camera _camera;
     private Vector2 facingDirection;
@@ -56,6 +56,23 @@ public class PlayerScript : MonoBehaviour
 
          }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            takeDamage();
+        }
+    }
+
+    public void takeDamage()
+    {
+        health--;
+        if (health == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator ReloadGun()

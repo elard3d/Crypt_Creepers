@@ -25,5 +25,11 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+        if (health <=0)
+        {
+            Destroy(gameObject);
+        }
+        
     }
+
 }
