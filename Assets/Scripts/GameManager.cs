@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private int time = 30;
+    [SerializeField] public int dificulty = 1;
     
     //Patron de Diseño Singleton
     public static GameManager Instance;

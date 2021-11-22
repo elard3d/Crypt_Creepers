@@ -129675,7 +129675,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b9c2bbcfff4aa46b2050b63965f77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2663628956480777683, guid: 4aa264932f4b3814cb3b170933be6308, type: 3}
+  enemyPrefab:
+  - {fileID: 3836754531405100623, guid: 8415fc06866eceb4f9624b921807c02c, type: 3}
+  - {fileID: 2663628956480777683, guid: 4aa264932f4b3814cb3b170933be6308, type: 3}
+  spawRate: 1
 --- !u!4 &585724251
 Transform:
   m_ObjectHideFlags: 0
@@ -129914,6 +129917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 5
+  dificulty: 1
 --- !u!212 &1790588633
 SpriteRenderer:
   m_ObjectHideFlags: 0
