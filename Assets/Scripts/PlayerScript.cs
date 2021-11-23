@@ -24,6 +24,8 @@ public class PlayerScript : MonoBehaviour
     private bool gunLoaded = true;
 
     [SerializeField] private float fireRate = 1;
+
+    private bool powerShotEnable;
     
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,11 @@ public class PlayerScript : MonoBehaviour
              gunLoaded = false;
              float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg; // convierde de radiames a grados
              Quaternion targrtRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-             Instantiate(bulletPrefab, transform.position, targrtRotation);
+             Transform bulletClone = Instantiate(bulletPrefab, transform.position, targrtRotation);
+             if (powerShotEnable)
+             {
+                 bulletClone.GetComponent<BulletScript>().powerShot = true;
+             }
              StartCoroutine(ReloadGun());
 
          }
@@ -69,7 +75,26 @@ public class PlayerScript : MonoBehaviour
         {
             takeDamage();
         }
+
+        if (other.CompareTag("PowerUp"))
+        {
+            switch (other.GetComponent<PowerUpScript>()._powerUpType)
+            {
+                case PowerUpScript.PowerUpType.FireRateIncrease:
+                    //INCREMENTAR cadencia de disparo
+                    fireRate++;
+                break;
+                case PowerUpScript.PowerUpType.PowerShot : 
+                    //Activar el power shot
+                    powerShotEnable = true;
+                    break;
+            }
+            
+            Destroy(other.gameObject,0.1f);
+        }
     }
+    
+    
 
     public void takeDamage()
     {

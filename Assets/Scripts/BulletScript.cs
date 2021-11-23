@@ -6,6 +6,9 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
+    [SerializeField] private int healt = 3;
+
+    public bool powerShot;
 
     private void Start()
     {
@@ -21,9 +24,15 @@ public class BulletScript : MonoBehaviour
         {
             if (collision.CompareTag("Enemy"))
             {
-                
                 collision.GetComponent<EnemyScript>().TakeDamage();
-                Destroy(gameObject);
+                if (!powerShot)
+                    Destroy(gameObject);
+                healt--;
+                
+                if (healt<=0)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 }
