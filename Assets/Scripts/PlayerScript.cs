@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     //Velocidad de jugador
     public float speed = 3;
     //Vidas del jugador
-    [SerializeField] private float health = 10;
+    [SerializeField] private int health = 10;
     //Seleccion de 
     [SerializeField] private Transform aim;
     [SerializeField] private Camera _camera;
@@ -30,7 +30,17 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private bool invulnerable;
     [SerializeField] private float invurnerableTime = 3;
-    
+
+
+    public int Health
+    {
+        get => health;
+        set{
+            health = value;
+            //Asignar HEAL al UI
+            UiManager.Instance.UpdateUIHealt(health);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -105,12 +115,15 @@ public class PlayerScript : MonoBehaviour
         if (invulnerable)
             return;
         
-        health--;
+        Health--;
         invulnerable = true;
         StartCoroutine(MakeVulnerablAgain()); 
-        if (health == 0)
+        if (Health == 0)
         {
-            Destroy(gameObject);
+            //El juego se acabó
+            GameManager.Instance.gamerOver = true;
+            UiManager.Instance.ShowGameOverScreen();
+            //Destroy(gameObject);
         }
     }
 

@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public int time = 30;
     public int dificulty = 1;
+
+    public bool gamerOver;
 
     [SerializeField] private int score;
 
@@ -17,6 +20,10 @@ public class GameManager : MonoBehaviour
         {
             //asigana variable y valor a la propiedad
             score = value;
+            
+            //ENVIA DATOS AL UI DEL SCORE
+            UiManager.Instance.UpdateUIScore(score);
+            
             if (score % 1000 == 0)
             {
                 dificulty++;
@@ -48,7 +55,13 @@ public class GameManager : MonoBehaviour
         }
         
         //GAMEOVER
-        
+        gamerOver = true;
+        UiManager.Instance.ShowGameOverScreen();
         Debug.Log("GAMEOVER");
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("Game");
     }
 }
