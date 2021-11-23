@@ -10,8 +10,11 @@ public class PlayerScript : MonoBehaviour
 
     private Vector3 moveDirection;
     
+    //Velocidad de jugador
     [SerializeField] private float speed = 3;
+    //Vidas del jugador
     [SerializeField] private float health = 3;
+    //Seleccion de 
     [SerializeField] private Transform aim;
     [SerializeField] private Camera _camera;
     private Vector2 facingDirection;
@@ -31,6 +34,8 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        //Teclas A,W,D y -><- ^
         _h = Input.GetAxis("Horizontal");
         _v = Input.GetAxis("Vertical");
 

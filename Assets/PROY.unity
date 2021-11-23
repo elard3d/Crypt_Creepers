@@ -168,7 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkPointPrefab: {fileID: 5607558532806242161, guid: 07011773ec617ab45bacc6545d643749, type: 3}
   checkPointSpawnDeley: 8
+  powerUpSpawnDeley: 5
   spawnRadius: 10
+  powerUpPrefab:
+  - {fileID: 658380548369933466, guid: 71bc5b4d1e37ddf4cacca18d6e24fa8c, type: 3}
+  - {fileID: 658380548369933466, guid: 8416e426d2709e44d8d4fc02c3e072ef, type: 3}
 --- !u!1 &362430488
 GameObject:
   m_ObjectHideFlags: 0
@@ -130246,7 +130250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15033a35a8023184db8ac304019ceb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 10
+  time: 30
   dificulty: 1
 --- !u!212 &1790588633
 SpriteRenderer:
