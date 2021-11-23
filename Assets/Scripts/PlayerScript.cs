@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     //Velocidad de jugador
     [SerializeField] private float speed = 3;
     //Vidas del jugador
-    [SerializeField] private float health = 3;
+    [SerializeField] private float health = 10;
     //Seleccion de 
     [SerializeField] private Transform aim;
     [SerializeField] private Camera _camera;
@@ -24,8 +24,12 @@ public class PlayerScript : MonoBehaviour
     private bool gunLoaded = true;
 
     [SerializeField] private float fireRate = 1;
+    
 
     private bool powerShotEnable;
+
+    [SerializeField] private bool invulnerable;
+    [SerializeField] private float invurnerableTime = 3;
     
     // Start is called before the first frame update
     void Start()
@@ -98,7 +102,12 @@ public class PlayerScript : MonoBehaviour
 
     public void takeDamage()
     {
+        if (invulnerable)
+            return;
+        
         health--;
+        invulnerable = true;
+        StartCoroutine(MakeVulnerablAgain()); 
         if (health == 0)
         {
             Destroy(gameObject);
@@ -111,4 +120,10 @@ public class PlayerScript : MonoBehaviour
         gunLoaded = true;
     }
 
+    IEnumerator MakeVulnerablAgain()
+    {
+        yield return new WaitForSeconds(invurnerableTime);
+        invulnerable = false;
+    }
+    
 }

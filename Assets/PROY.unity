@@ -129730,11 +129730,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  health: 3
+  health: 10
   aim: {fileID: 1333332689}
   _camera: {fileID: 1822877084}
   bulletPrefab: {fileID: 1114663276286569859, guid: 136266f2458efec4d845f5a7c4c49524, type: 3}
   fireRate: 5
+  invulnerable: 0
 --- !u!61 &488084889
 BoxCollider2D:
   m_ObjectHideFlags: 0
