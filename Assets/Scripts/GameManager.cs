@@ -7,6 +7,22 @@ public class GameManager : MonoBehaviour
 {
     public int time = 30;
     public int dificulty = 1;
+
+    [SerializeField] private int score;
+
+    public int Score
+    {
+        get => score;
+        set
+        {
+            //asigana variable y valor a la propiedad
+            score = value;
+            if (score % 1000 == 0)
+            {
+                dificulty++;
+            }
+        }
+    }
     
     //Patron de Diseño Singleton
     public static GameManager Instance;

@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     private Transform player;
     [SerializeField] private int health = 1;
     [SerializeField] private float speed = 1;
+    [SerializeField] private int scorePoints = 100;
 
     private void Start()
     {
@@ -33,6 +34,8 @@ public class EnemyScript : MonoBehaviour
         health--;
         if (health <=0)
         {
+            //incrementa 100 puntos cada vez que matamos
+            GameManager.Instance.Score += scorePoints ;
             Destroy(gameObject);
         }
         
