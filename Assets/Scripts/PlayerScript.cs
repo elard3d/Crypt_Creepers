@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     private Vector3 moveDirection;
     
     //Velocidad de jugador
-    [SerializeField] private float speed = 3;
+    public float speed = 3;
     //Vidas del jugador
     [SerializeField] private float health = 10;
     //Seleccion de 
