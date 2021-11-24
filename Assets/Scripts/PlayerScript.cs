@@ -30,9 +30,13 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private bool invulnerable;
     [SerializeField] private float invurnerableTime = 3;
+    [SerializeField] private float blinkRate = 1;
+    
 
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    private CamaraController _camaraController;
 
 
     public int Health
@@ -49,7 +53,8 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        _camaraController = FindObjectOfType<CamaraController>();
+        
     }
 
     // Update is called once per frame
@@ -133,6 +138,7 @@ public class PlayerScript : MonoBehaviour
         
         Health--;
         invulnerable = true;
+        _camaraController.Shake();
         StartCoroutine(MakeVulnerablAgain()); 
         if (Health == 0)
         {
@@ -152,8 +158,22 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator MakeVulnerablAgain()
     {
+        StartCoroutine(BlinkRoutine());
         yield return new WaitForSeconds(invurnerableTime);
         invulnerable = false;
+    }
+
+    IEnumerator BlinkRoutine()
+    {
+        int t = 10;
+        while (t>0)
+        {
+            _spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(t * blinkRate);
+            _spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(t * blinkRate);
+            t--;
+        }
     }
     
 }
