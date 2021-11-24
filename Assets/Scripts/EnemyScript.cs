@@ -11,6 +11,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float speed = 1;
     [SerializeField] private int scorePoints = 100;
 
+    [SerializeField] private AudioClip impactClip;
+
     private void Start()
     {
          player = FindObjectOfType<PlayerScript>().transform;
@@ -32,11 +34,13 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+        
+        AudioSource.PlayClipAtPoint(impactClip, transform.position);
         if (health <=0)
         {
             //incrementa 100 puntos cada vez que matamos
             GameManager.Instance.Score += scorePoints ;
-            Destroy(gameObject);
+            Destroy(gameObject, 0.1f);
         }
         
     }
