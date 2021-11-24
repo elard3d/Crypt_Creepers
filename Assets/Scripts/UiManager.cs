@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     //REferenciar elementos de interfaz
-
+    
     public static UiManager Instance;
+    
     [SerializeField] private Text healText;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text timeText;
@@ -44,7 +45,7 @@ public class UiManager : MonoBehaviour
     {
         
         gameOverScreen.SetActive(true);
-        finalScore.text = "SCORE: " + GameManager.Instance.Score;
+        finalScore.text = "" + GameManager.Instance.Score;
     }
     
     

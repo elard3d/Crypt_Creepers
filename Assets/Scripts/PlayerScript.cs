@@ -31,6 +31,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private bool invulnerable;
     [SerializeField] private float invurnerableTime = 3;
 
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
 
     public int Health
     {
@@ -41,6 +44,8 @@ public class PlayerScript : MonoBehaviour
             UiManager.Instance.UpdateUIHealt(health);
         }
     }
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +65,7 @@ public class PlayerScript : MonoBehaviour
 
 
         transform.position += moveDirection * Time.deltaTime * speed;
-        
+
         //Movimiento de la mira
         
          facingDirection = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -80,6 +85,17 @@ public class PlayerScript : MonoBehaviour
              StartCoroutine(ReloadGun());
 
          }
+         
+         //Cambiar de animación
+         _animator.SetFloat("Speed", moveDirection.magnitude);
+         if (aim.position.x>transform.position.x)
+         {
+             _spriteRenderer.flipX = true;
+         }else if (aim.position.x < transform.position.x)
+         {
+             _spriteRenderer.flipX = false;
+         }
+
 
     }
 
@@ -123,6 +139,7 @@ public class PlayerScript : MonoBehaviour
             //El juego se acabó
             GameManager.Instance.gamerOver = true;
             UiManager.Instance.ShowGameOverScreen();
+            Debug.Log("GAMEOVER POR PERDIDA DE VIDAS");
             //Destroy(gameObject);
         }
     }

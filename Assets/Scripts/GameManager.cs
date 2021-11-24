@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         //GAMEOVER
         gamerOver = true;
         UiManager.Instance.ShowGameOverScreen();
-        Debug.Log("GAMEOVER");
+        Debug.Log("GAMEOVER SE ACABÓ EL TIEMPO");
     }
 
     public void PlayAgain()
